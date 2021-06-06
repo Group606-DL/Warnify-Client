@@ -2,10 +2,11 @@
 
 const sensitiveLabels = [
     'Explosion/Fire/Smoke', 'Explosion', 'Riot/Crowded', 'Fighting', 'Shooting',
-    'Car accident', 'Gunshot_gunfire', 'Civil_defense_siren'
+    'Car accident', 'Gunshot_gunfire', 'Civil_defense_siren', 'Abuse', 'Fireworks', 
+    'Screaming'
 ];
 
-const normalLabels = ['Music/Talking'];
+const normalLabels = ['Music/Talking', 'NonViolence', ];
 
 const getSortedLabels = (audioPredictions, videoPredictions) => {
     const videoLabels = videoPredictions.map(pred => pred.label); 
