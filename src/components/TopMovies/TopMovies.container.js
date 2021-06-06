@@ -6,17 +6,18 @@ import warning from "../../assets/warning.png";
 import smiley from "../../assets/smiley.png";
 
 import styles from "./TopMovies.module.css";
-import getIconFromLabels from "../../services/labelsToIcon";
 import Switch from "@material-ui/core/Switch";
+import {getSortedLabels} from "../../services/labelsToIcon";
 
 const detectionIntervalInSeconds = 5;
 
 const TopMoviesContainer = (props) => {
     const [videoUrl, setVideoUrl] = useState('');
     const [fileLists, setVideoList] = useState([]);
-    const [videoLabels, setVideoLabels] = useState({});
+    const [allFilePredictions, setAllFilePredictions] = useState({});
     const [selectedItem, setSelectedItem] = useState(fileLists[0]);
     const [iconToShow, setIconToShow] = useState(smiley);
+    const [labels, setLabels] = useState({video: [], audio: []});
     const [shouldMuteOnWarning, setShouldMuteOnWarning] = useState(false);
     // const [isPlaying, setIsPlaying] = useState(false);
 
@@ -46,7 +47,7 @@ const TopMoviesContainer = (props) => {
         }).then((res) => {
             return res.json();
         }).then((labels) => {
-            setVideoLabels(JSON.parse(labels));
+            setAllFilePredictions(JSON.parse(labels));
         }).catch(err => {
             console.error(err);
         })
@@ -66,9 +67,17 @@ const TopMoviesContainer = (props) => {
         const rounded = Math.round(cursorInSeconds);
         let keyToPull = rounded > detectionIntervalInSeconds ? rounded : 0;
         keyToPull = keyToPull - (keyToPull % detectionIntervalInSeconds);
-        console.log({keyToPull, cursorInSeconds});
-        const {audio, video} = videoLabels[keyToPull];
-        setIconToShow(getIconFromLabels(audio, video));
+        
+        const {audio, video} = allFilePredictions[keyToPull];
+        
+        const {sensitiveVideoLabels, sensitiveAudioLabels, audioLabels, videoLabels} = getSortedLabels(audio, video);
+        if (sensitiveVideoLabels.length > 0 || sensitiveAudioLabels.length > 0) {
+            setIconToShow(warning);
+        } else {
+            setIconToShow(smiley);
+        }
+        
+        setLabels({video: videoLabels, audio: audioLabels});
     }
 
     return (
@@ -88,6 +97,22 @@ const TopMoviesContainer = (props) => {
                     </div>
                 </div>
                 <TopMoviesList list={fileLists} selectedItem={selectedItem} onItemSelected={changeSource}/>
+                <div style={{marginLeft: '30px', marginTop: '10px', color: 'white'}}>
+                    {(labels && labels.audio && labels.audio.length > 0) && (
+                        <div>
+                            <div>Audio: </div>
+                            {<span>{labels.audio.join(', ')}</span>}
+                            <br/>
+                        </div>
+                    )}
+
+                    {(labels && labels.video && labels.video.length > 0) && (
+                        <div>
+                            <div>Video: </div>
+                            {<span>{labels.video.join(', ')}</span>}
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     )
