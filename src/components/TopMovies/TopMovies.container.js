@@ -67,6 +67,9 @@ const TopMoviesContainer = (props) => {
         const rounded = Math.round(cursorInSeconds);
         let keyToPull = rounded > detectionIntervalInSeconds ? rounded : 0;
         keyToPull = keyToPull - (keyToPull % detectionIntervalInSeconds);
+        if (!allFilePredictions[keyToPull]) {
+            return;
+        }
         
         const {audio, video} = allFilePredictions[keyToPull];
         
