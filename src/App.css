@@ -1,0 +1,31 @@
+.App {
+  text-align: center;
+  height: 100%;
+}
+
+.App-Background {
+  background-image: url(./assets/background.jpg);
+  opacity: 0.9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-repeat: round;
+  height: 100%;
+  width: 100%;
+}
+
+.App-Body {
+  position: absolute;
+  right: 25%;
+  height: 750px;
+  width: 1000px;
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 15%;
+  border: 1px solid white;
+  border-radius: 15px;
+}
+
+h1 {
+  color: white;
+}
