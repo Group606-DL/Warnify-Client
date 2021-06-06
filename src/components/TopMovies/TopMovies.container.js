@@ -100,18 +100,18 @@ const TopMoviesContainer = (props) => {
                     </div>
                 </div>
                 <TopMoviesList list={fileLists} selectedItem={selectedItem} onItemSelected={changeSource}/>
-                <div style={{marginLeft: '30px', marginTop: '10px', color: 'white'}}>
+                <div style={{marginLeft: '30px', marginTop: '10px', color: 'white', maxWidth: '15%',  width: '15%'}}>
                     {(labels && labels.audio && labels.audio.length > 0) && (
                         <div>
-                            <div>Audio: </div>
+                            <div><b>Audio: </b></div>
                             {<span>{labels.audio.join(', ')}</span>}
-                            <br/>
+                            <hr/>
                         </div>
                     )}
 
                     {(labels && labels.video && labels.video.length > 0) && (
                         <div>
-                            <div>Video: </div>
+                            <div><b>Video: </b></div>
                             {<span>{labels.video.join(', ')}</span>}
                         </div>
                     )}
