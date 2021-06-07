@@ -8,6 +8,7 @@ import smiley from "../../assets/smiley.png";
 import styles from "./TopMovies.module.css";
 import Switch from "@material-ui/core/Switch";
 import {getSortedLabels} from "../../services/labelsToIcon";
+import {Slider} from "@material-ui/core";
 
 const detectionIntervalInSeconds = 5;
 
@@ -19,9 +20,11 @@ const TopMoviesContainer = (props) => {
     const [iconToShow, setIconToShow] = useState(smiley);
     const [labels, setLabels] = useState({video: [], audio: []});
     const [shouldMuteOnWarning, setShouldMuteOnWarning] = useState(false);
-    // const [isPlaying, setIsPlaying] = useState(false);
-
-    const showWarn = selectedItem && selectedItem.isProcessed;
+    const [shouldCensorOnWarning, setShouldCensorOnWarning] = useState(false);
+    const [blur, setBlur] = useState(0.8);
+    const [thereIsSensitiveScene, setThereIsSensitiveScene] = useState(false);
+    
+    let showWarn = (selectedItem && selectedItem.isProcessed) || thereIsSensitiveScene;
 
     useEffect(() => {
         fetch('http://localhost:8080/videos/names', {
@@ -76,27 +79,54 @@ const TopMoviesContainer = (props) => {
         const {sensitiveVideoLabels, sensitiveAudioLabels, audioLabels, videoLabels} = getSortedLabels(audio, video);
         if (sensitiveVideoLabels.length > 0 || sensitiveAudioLabels.length > 0) {
             setIconToShow(warning);
+            setThereIsSensitiveScene(true);
         } else {
             setIconToShow(smiley);
+            setThereIsSensitiveScene(false);
         }
         
         setLabels({video: videoLabels, audio: audioLabels});
     }
+    
+    const onBlurChange = (ev, newValue) => {
+        setBlur(newValue);
+    } 
 
     return (
         <div className={styles.container}>
-            { showWarn && <img src={iconToShow} className={styles.warning}/> }
-            <ReactPlayer url={videoUrl} width={'100%'} onProgress={showWarn && onVideoProgress}
-                         progressInterval={1000}
-                         onSeek={showWarn && setIconByPlayedCursor}
-                         muted={shouldMuteOnWarning && iconToShow === warning}
-                         controls
-            />
+            <div className={styles.iconWrapper}>
+                { showWarn && <img src={iconToShow} className={styles.warning}/> }
+            </div>
+            <div className={styles.videoContainer}>
+                <ReactPlayer url={videoUrl} width={'100%'} onProgress={showWarn && onVideoProgress}
+                             style={shouldCensorOnWarning && showWarn && thereIsSensitiveScene && {filter: `blur(${blur}px)`}}
+                             progressInterval={1000}
+                             onSeek={showWarn && setIconByPlayedCursor}
+                             muted={shouldMuteOnWarning && iconToShow === warning}
+                             controls
+                />
+            </div>
+            
             <div className={styles.bottomPanel}>
-                <div>
+                <div className={styles.options}>
                     <div>
                         <label style={{color: 'white', marginRight: '10px'}}>Mute On Warning</label>
                         <Switch checked={shouldMuteOnWarning} onChange={(evt) => setShouldMuteOnWarning(evt.target.checked)}/>
+                    </div>
+                    <div>
+                        <label style={{color: 'white', marginRight: '10px'}}>Censor On Warning</label>
+                        <Switch checked={shouldCensorOnWarning} onChange={(evt) => setShouldCensorOnWarning(evt.target.checked)}/>
+                        <div>
+                            <label style={{color: 'white', marginRight: '10px', textAlign: 'left'}}>Blur ratio</label>
+                            <span style={{color: 'white'}}>
+                                <span>{blur}</span>
+                                <div style={{display: 'flex', flexDirection: 'row'}}>
+                                    <span>0</span>
+                                    <Slider min={0} max={15} step={1} value={blur} onChange={onBlurChange} />
+                                    <span>15</span>
+                                </div>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <TopMoviesList list={fileLists} selectedItem={selectedItem} onItemSelected={changeSource}/>
