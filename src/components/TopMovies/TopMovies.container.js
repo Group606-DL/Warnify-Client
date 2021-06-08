@@ -23,7 +23,7 @@ const TopMoviesContainer = (props) => {
     const showWarn = selectedItem && selectedItem.isProcessed;
 
     useEffect(() => {
-        fetch('http://localhost:8080/videos/names', {
+        fetch('http://193.106.55.106:8080/videos/names', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ const TopMoviesContainer = (props) => {
     }, []);
 
     const getLabels = (fileName) => (
-        fetch(`http://localhost:8080/censoredInfo/${fileName}`, {
+        fetch(`http://193.106.55.106:8080/censoredInfo/${fileName}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ const TopMoviesContainer = (props) => {
     const changeSource = (videoDetails) => {
         const encodedFileName = encodeURIComponent(videoDetails.file);
         getLabels(encodedFileName).then(() => {
-            setVideoUrl(`http://localhost:8080/stream/${encodedFileName}`);
+            setVideoUrl(`http://193.106.55.106:8080/stream/${encodedFileName}`);
             setSelectedItem(videoDetails);
         });
     }

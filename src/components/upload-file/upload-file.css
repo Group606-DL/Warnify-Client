@@ -81,6 +81,12 @@ input[type="file"] {
   border-radius: 10px;
 }
 
+button:disabled {
+  border-color: gray;
+  color: gray;
+  cursor: unset;
+}
+
 /* .button:hover {
   background-color: #00000026;
 } */

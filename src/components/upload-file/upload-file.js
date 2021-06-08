@@ -6,7 +6,7 @@ import uploadImg from "../../assets/upload.png";
 import Dropzone from "react-dropzone";
 
 const UploadFile = () => {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState(undefined);
 
   const onFileUpload = () => {
     // Create an object of formData
@@ -58,7 +58,8 @@ const UploadFile = () => {
         )}
       </div>
       <div className="buttons">
-        <button onClick={() => onFileUpload()} className="uploadBtn button">
+        {console.log("file",file)}
+        <button disabled={file === undefined} onClick={() => onFileUpload()} className="uploadBtn button">
           Upload
         </button>
         <button onClick={() => setFile(undefined)} className="clearBtn button">
