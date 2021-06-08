@@ -18,8 +18,7 @@
 .App-Body {
   position: absolute;
   right: 25%;
-  height: 750px;
-  width: 1000px;
+  width: 70%;
   background-color: rgba(0, 0, 0, 0.7);
   top: 15%;
   border: 1px solid white;
