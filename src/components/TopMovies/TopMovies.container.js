@@ -180,11 +180,12 @@ const TopMoviesContainer = (props) => {
                 onChange={(e) => {
                   setVideoList(
                     defaultVideos.filter((file) =>
-                      file.file.includes(e.target.value)
+                      file.file.toLowerCase().includes(e.target.value.toLowerCase())
                     )
                   );
                 }}
               />
+              <i class="fa-solid fa-magnifying-glass"></i>
             </div>
           </div>
         </div>
