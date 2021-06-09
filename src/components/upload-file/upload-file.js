@@ -21,7 +21,7 @@ const UploadFile = () => {
     // Details of the uploaded file
     console.log(file);
 
-    axios.post("http://localhost:8080/upload", formData).then(
+    axios.post("http://193.106.55.106:8080/upload", formData).then(
       (res) => {
         alert("File uploaded successfully");
         setFile(undefined);
