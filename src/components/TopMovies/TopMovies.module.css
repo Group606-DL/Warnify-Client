@@ -11,7 +11,7 @@
 .list {
   background-color: rgba(186, 178, 178, 0.2);
   overflow-y: auto;
-  max-height: 25vw;
+  max-height: 50vh;
 }
 
 .listItem {
