@@ -7,7 +7,12 @@ import Dropzone from "react-dropzone";
 
 const UploadFile = () => {
   const [file, setFile] = useState(undefined);
+  const [uploadProgress, setUploadProgress] = useState(null);
 
+  const uploadProgressText = uploadProgress && (
+      (uploadProgress === 100 ? 'File uploaded successfully' : `${uploadProgress}%`)
+  );
+  
   const onFileUpload = () => {
     // Create an object of formData
     const formData = new FormData();
@@ -25,9 +30,11 @@ const UploadFile = () => {
       (res) => {
         alert("File uploaded successfully");
         setFile(undefined);
+        setUploadProgress(null);
       },
       (err) => {
-        alert("Failed to upload the movie: " + err.message);
+          alert("Failed to upload the movie: " + err.message);
+          setUploadProgress(null);
       }
     );
   };
@@ -57,6 +64,9 @@ const UploadFile = () => {
           </div>
         )}
       </div>
+        <div>
+            <b style={{color: 'white'}}>{uploadProgressText}</b>
+        </div>
       <div className="buttons">
         {console.log("file",file)}
         <button disabled={file === undefined} onClick={() => onFileUpload()} className="uploadBtn button">

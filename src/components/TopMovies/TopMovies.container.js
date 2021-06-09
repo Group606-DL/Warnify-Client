@@ -130,7 +130,7 @@ const TopMoviesContainer = (props) => {
                     </div>
                 </div>
                 <TopMoviesList list={fileLists} selectedItem={selectedItem} onItemSelected={changeSource}/>
-                <div style={{marginLeft: '30px', marginTop: '10px', color: 'white', maxWidth: '15%',  width: '15%'}}>
+                <div style={{marginTop: '10px', color: 'white', maxWidth: '15%',  width: '15%'}}>
                     {(labels && labels.audio && labels.audio.length > 0) && (
                         <div>
                             <div><b>Audio: </b></div>

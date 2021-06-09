@@ -66,6 +66,7 @@ input[type="file"] {
   justify-content: center;
   align-items: center;
   margin-top: 50px;
+  margin-left: 50px;
 }
 
 .button {
@@ -74,9 +75,10 @@ input[type="file"] {
   border: 2px solid white;
   height: 40px;
   width: 90px;
-  margin-left: 10px;
   cursor: pointer;
   margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 50px;
   font-size: 16px;
   border-radius: 10px;
 }
@@ -92,17 +94,17 @@ button:disabled {
 } */
 
 .uploaded-file {
-  height: 410px;
-  width: 800px;
+  height: 100%;
+  width: 100%;
   margin-top: 100px;
 }
 
 .drop-zone {
-  height: 500px;
-  width: 800px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 5px dashed white;
   border-radius: 20px;
+  padding: 30px;
 }

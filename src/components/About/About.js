@@ -1,6 +1,6 @@
 const About = () => {
   return (
-    <>
+    <div style={{marginBottom: '50px'}}>
       <h1>About Us</h1>
       <p
         style={{
@@ -21,7 +21,7 @@ const About = () => {
         We want to give you the watching experience you deserve!
 
       </p>
-    </>
+    </div>
   );
 };
 
