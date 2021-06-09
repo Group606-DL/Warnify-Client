@@ -60,9 +60,9 @@ const UploadFile = () => {
             <div className={'modal'}>
                 <div className={'modal-content'}>
                     <div className={'modal-text'}>
-                        {uploadError ? <span>File uploaded successfully</span> : (
-                            <span>File could not be uploaded {uploadError && uploadError.message}</span>
-                        )}
+                        {uploadError ? <span>File could not be uploaded {uploadError && uploadError.message}</span> :
+                            <span>File uploaded successfully</span>
+                        }
                     </div>
                     <div className={'modal-footer'}>
                         <Button variant={'outlined'} color={'primary'} className={'modal-ok-button'} 
