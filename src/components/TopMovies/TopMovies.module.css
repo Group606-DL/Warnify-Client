@@ -11,6 +11,7 @@
 .list {
   background-color: rgba(186, 178, 178, 0.2);
   overflow-y: auto;
+  max-height: 25vw;
 }
 
 .listItem {
@@ -59,7 +60,7 @@
 .bottomPanel {
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   background-color: rgba(40, 71, 110, 0.5);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -80,7 +81,6 @@
 }
 
 .options {
-  width: 33%;
   display: flex;
   flex-direction: column;
   align-items: center;

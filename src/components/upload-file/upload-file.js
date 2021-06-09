@@ -50,7 +50,7 @@ const UploadFile = () => {
         {!file ? (
           <Dropzone onDrop={(acceptedFiles) => setFile(acceptedFiles[0])}>
             {({ getRootProps, getInputProps }) => (
-              <section>
+              <section className="upload-section">
                 <div {...getRootProps()} className="drop-zone">
                   <input {...getInputProps()} />
                   <div>
