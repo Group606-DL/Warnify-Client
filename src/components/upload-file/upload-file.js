@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./upload-file.css";
 import axios from "axios";
 import fileImg from "../../assets/file.png";
 import uploadImg from "../../assets/upload.png";
 import Dropzone from "react-dropzone";
+import Modal from "@material-ui/core/Modal";
+import {Button} from "@material-ui/core";
 
 const UploadFile = () => {
   const [file, setFile] = useState(undefined);
   const [uploadProgress, setUploadProgress] = useState(null);
+  const [isModalOpened, setIsModelOpened] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
 
   const uploadProgressText = uploadProgress && (
       (uploadProgress === 100 ? 'File uploaded successfully' : `${uploadProgress}%`)
@@ -32,19 +36,43 @@ const UploadFile = () => {
         }
     }).then(
       (res) => {
-        alert("File uploaded successfully");
+        setIsModelOpened(true)
         setFile(undefined);
         setUploadProgress(null);
+        setUploadError(null);
       },
       (err) => {
-          alert("Failed to upload the movie: " + err.message);
+          setIsModelOpened(true);
           setUploadProgress(null);
+          setUploadError(err);
       }
     );
   };
+  
+  const onClose = () => {
+      setUploadError(null);
+      setIsModelOpened(false);
+  }
 
   return (
     <>
+        <Modal open={isModalOpened} onClose={onClose}>
+            <div className={'modal'}>
+                <div className={'modal-content'}>
+                    <div className={'modal-text'}>
+                        {uploadError ? <span>File uploaded successfully</span> : (
+                            <span>File could not be uploaded {uploadError && uploadError.message}</span>
+                        )}
+                    </div>
+                    <div className={'modal-footer'}>
+                        <Button variant={'outlined'} color={'primary'} className={'modal-ok-button'} 
+                                onClick={onClose}>
+                            <span>OK</span>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        </Modal>
       <h1>Upload Video</h1>
       <div className="upload">
         {!file ? (
