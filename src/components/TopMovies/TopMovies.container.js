@@ -98,11 +98,13 @@ const TopMoviesContainer = (props) => {
                 { showWarn && <img src={iconToShow} className={styles.warning}/> }
             </div>
             <div className={styles.videoContainer}>
-                <ReactPlayer url={videoUrl} width={'100%'} onProgress={showWarn && onVideoProgress}
+                <ReactPlayer url={videoUrl} width={'100%'}
+                             onProgress={showWarn && onVideoProgress}
                              style={shouldCensorOnWarning && showWarn && thereIsSensitiveScene && {filter: `blur(${blur}px)`}}
                              progressInterval={1000}
                              onSeek={showWarn && setIconByPlayedCursor}
                              muted={shouldMuteOnWarning && iconToShow === warning}
+
                              controls
                 />
             </div>
@@ -130,7 +132,7 @@ const TopMoviesContainer = (props) => {
                     </div>
                 </div>
                 <TopMoviesList list={fileLists} selectedItem={selectedItem} onItemSelected={changeSource}/>
-                <div style={{marginLeft: '30px', marginTop: '10px', color: 'white', maxWidth: '15%',  width: '15%'}}>
+                <div style={{marginTop: '10px', color: 'white', maxWidth: '20%', overflowWrap: 'break-word', width:'20%'}}>
                     {(labels && labels.audio && labels.audio.length > 0) && (
                         <div>
                             <div><b>Audio: </b></div>

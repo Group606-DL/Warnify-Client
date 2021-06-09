@@ -39,11 +39,19 @@ input[type="file"] {
 }
 
 .upload {
-  margin-top: 50px;
-  display: flex;
-  align-items: center;
+  margin-top: 5%;
+  /* display: flex; */
+  /* align-items: center; */
   font-family: "Gisha";
-  justify-content: center;
+  /* justify-content: center; */
+}
+
+.upload-section {
+  width: 70%;
+  display: flex;
+  margin: auto;
+
+  cursor: pointer;
 }
 
 .drop-zone-text {
@@ -58,14 +66,20 @@ input[type="file"] {
 }
 
 .upload-img {
-  height: 200px;
+  height: 100px;
 }
 
 .buttons {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 50px;
+  margin-left: 50px; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
 }
 
 .button {
@@ -74,9 +88,11 @@ input[type="file"] {
   border: 2px solid white;
   height: 40px;
   width: 90px;
-  margin-left: 10px;
   cursor: pointer;
-  margin-right: 10px;
+  /* margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 50px; */
+  margin: 0 2% 5%;
   font-size: 16px;
   border-radius: 10px;
 }
@@ -92,17 +108,17 @@ button:disabled {
 } */
 
 .uploaded-file {
-  height: 410px;
-  width: 800px;
+  height: 100%;
+  width: 100%;
   margin-top: 100px;
 }
 
 .drop-zone {
-  height: 500px;
-  width: 800px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 5px dashed white;
   border-radius: 20px;
+  padding: 30px;
 }

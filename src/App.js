@@ -10,7 +10,6 @@ const App = () => {
     <BrowserRouter>
       <div className="App">
         <Navbar />
-        <div className="App-Background" />
         <div className="App-Body">
           <Switch>
             <Route exact path="/">
@@ -28,6 +27,7 @@ const App = () => {
           </Switch>
         </div>
       </div>
+      <div className="App-Background" />
     </BrowserRouter>
   );
 };

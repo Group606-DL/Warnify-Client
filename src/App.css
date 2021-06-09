@@ -1,6 +1,12 @@
 .App {
   text-align: center;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .App-Background {
@@ -16,10 +22,10 @@
 }
 
 .App-Body {
+  z-index: 1;
   position: absolute;
-  right: 25%;
-  height: 750px;
-  width: 1000px;
+  /* right: 25%; */
+  width: 70%;
   background-color: rgba(0, 0, 0, 0.7);
   top: 15%;
   border: 1px solid white;

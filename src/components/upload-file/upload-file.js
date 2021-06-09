@@ -7,7 +7,12 @@ import Dropzone from "react-dropzone";
 
 const UploadFile = () => {
   const [file, setFile] = useState(undefined);
+  const [uploadProgress, setUploadProgress] = useState(null);
 
+  const uploadProgressText = uploadProgress && (
+      (uploadProgress === 100 ? 'File uploaded successfully' : `${uploadProgress}%`)
+  );
+  
   const onFileUpload = () => {
     // Create an object of formData
     const formData = new FormData();
@@ -21,13 +26,19 @@ const UploadFile = () => {
     // Details of the uploaded file
     console.log(file);
 
-    axios.post("http://localhost:8080/upload", formData).then(
+    axios.post("http://193.106.55.106:8080/upload", formData, {
+        onUploadProgress: progressEvent => {
+            setUploadProgress(((progressEvent.loaded / progressEvent.total) * 100).toFixed(2))
+        }
+    }).then(
       (res) => {
         alert("File uploaded successfully");
         setFile(undefined);
+        setUploadProgress(null);
       },
       (err) => {
-        alert("Failed to upload the movie: " + err.message);
+          alert("Failed to upload the movie: " + err.message);
+          setUploadProgress(null);
       }
     );
   };
@@ -39,7 +50,7 @@ const UploadFile = () => {
         {!file ? (
           <Dropzone onDrop={(acceptedFiles) => setFile(acceptedFiles[0])}>
             {({ getRootProps, getInputProps }) => (
-              <section>
+              <section className="upload-section">
                 <div {...getRootProps()} className="drop-zone">
                   <input {...getInputProps()} />
                   <div>
@@ -57,6 +68,9 @@ const UploadFile = () => {
           </div>
         )}
       </div>
+        <div>
+            <b style={{color: 'white'}}>{uploadProgressText}</b>
+        </div>
       <div className="buttons">
         {console.log("file",file)}
         <button disabled={file === undefined} onClick={() => onFileUpload()} className="uploadBtn button">

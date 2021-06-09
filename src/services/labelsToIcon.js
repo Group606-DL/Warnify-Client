@@ -1,9 +1,9 @@
 
 
 const sensitiveLabels = [
-    'Explosion/Fire/Smoke', 'Explosion', 'Riot/Crowded', 'Fighting', 'Shooting',
+    'Explosion/Fire/Smoke', 'Explosion', 'Riot/Crowded', 'Fighting', 'Gun/Gunshot',
     'Car accident', 'Gunshot_gunfire', 'Civil_defense_siren', 'Abuse', 'Fireworks', 
-    'Screaming'
+    'Screaming', 'Shooting'
 ];
 
 const normalLabels = ['Music/Talking', 'NonViolence', ];
